@@ -25,6 +25,7 @@ fn main() -> GameResult {
     let shader_params = ShaderParamsBuilder::new(&RunningTime { value: 0.0 }).build(&mut ctx);
 
     let world = World {
+        // Replacing the shader here with `None` prevents the panic
         shaders: [Some(shader), None],
         shader_params: [Some(shader_params), None],
         sprites: [
@@ -103,6 +104,7 @@ impl World {
     fn draw_ui(&self, ctx: &mut Context) -> GameResult {
         let mut canvas = Canvas::from_frame(ctx, None);
 
+        // Moving this line to line 99 prevents the panic
         canvas.draw(&self.ui_bg, DrawParam::new());
 
         canvas.finish(ctx)
